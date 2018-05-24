@@ -4,8 +4,13 @@
 from bs4 import BeautifulSoup
 import requests
 
-class SessionGoogle:
-    def __init__(self, url_login, url_auth, login, pwd):
+url_login = "https://accounts.google.com/ServiceLogin"
+url_auth = "https://accounts.google.com/ServiceLoginAuth"
+
+class GoogleSession:
+    def __init__(self, login, pwd):
+        global url_login, url_auth
+
         self.ses = requests.session()
         login_html = self.ses.get(url_login)
         soup_login = BeautifulSoup(login_html.content, "html.parser").find('form').find_all('input')
